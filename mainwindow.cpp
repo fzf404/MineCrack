@@ -7,16 +7,15 @@ HWND hWnd;       // 窗口句柄
 DWORD pid;       // 进程ID
 HANDLE hProcess; // 进程句柄
 
-unsigned char game_data[24][32];    // 棋盘地图
-DWORD dw_height;    // 棋盘高度
-DWORD dw_weight;    // 棋盘宽度
+unsigned char game_data[24][32]; // 棋盘地图
+DWORD dw_height;                 // 棋盘高度
+DWORD dw_weight;                 // 棋盘宽度
 
 // 模拟点击信息
 short gameX = 20;
 short gameY = 62;
 double dpi = 1.33;
 short boxXY[2];
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -26,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
   // 获得窗口句柄
   hWnd = ::FindWindow(NULL, "扫雷");
   if (!hWnd) {
-    QMessageBox::critical(this, "提示", "游戏未打开");
+    QMessageBox::critical(this, "Info", "Game Not Start");
     return;
   }
 
@@ -34,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
   GetWindowThreadProcessId(hWnd, &pid);
   hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
   if (!hProcess) {
-    QMessageBox::critical(this, "提示", "游戏进程打开失败");
+    QMessageBox::critical(this, "Info", "Open Game Process Error");
     return;
   }
 }
@@ -109,34 +108,50 @@ void MainWindow::on_pushButton_8_clicked() {
   }
 }
 
-void MainWindow::on_pushButton_9_clicked()
-{
-    for (int i = 0; i < dw_height; i++) {
-      for (int j = 0; j < dw_weight; j++) {
+void MainWindow::on_pushButton_9_clicked() {
+  for (int i = 0; i < dw_height; i++) {
+    for (int j = 0; j < dw_weight; j++) {
 
-        boxXY[0] = (gameX + (j * 15)) * dpi;
-        boxXY[1] = (gameY + (i * 15)) * dpi;
+      boxXY[0] = (gameX + (j * 15)) * dpi;
+      boxXY[1] = (gameY + (i * 15)) * dpi;
 
-        if (game_data[i][j] != 0x8F) {
-          ::PostMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, *(int *)boxXY);
-          ::PostMessage(hWnd, WM_LBUTTONUP, 0, *(int *)boxXY);
-        }
+      if (game_data[i][j] != 0x8F) {
+        ::PostMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, *(int *)boxXY);
+        ::PostMessage(hWnd, WM_LBUTTONUP, 0, *(int *)boxXY);
       }
     }
+  }
 }
 
-void MainWindow::on_pushButton_10_clicked()
-{
-    for (int i = 0; i < dw_height; i++) {
-      for (int j = 0; j < dw_weight; j++) {
+void MainWindow::on_pushButton_10_clicked() {
+  for (int i = 0; i < dw_height; i++) {
+    for (int j = 0; j < dw_weight; j++) {
 
-        boxXY[0] = (gameX + (j * 15)) * dpi;
-        boxXY[1] = (gameY + (i * 15)) * dpi;
+      boxXY[0] = (gameX + (j * 15)) * dpi;
+      boxXY[1] = (gameY + (i * 15)) * dpi;
 
-        if (game_data[i][j] == 0x8F) {
-          ::PostMessage(hWnd, WM_RBUTTONDOWN, MK_RBUTTON, *(int *)boxXY);
-          ::PostMessage(hWnd, WM_RBUTTONUP, 0, *(int *)boxXY);
-        }
+      if (game_data[i][j] == 0x8F) {
+        ::PostMessage(hWnd, WM_RBUTTONDOWN, MK_RBUTTON, *(int *)boxXY);
+        ::PostMessage(hWnd, WM_RBUTTONUP, 0, *(int *)boxXY);
       }
+    }
+  }
+}
+
+void MainWindow::on_comboBox_activated(int index)
+{
+    switch (index) {
+    case 0:
+      dpi = 1.33;
+      break;
+    case 1:
+      dpi = 1;
+      break;
+    case 2:
+      dpi = 1.6;
+      break;
+    case 3:
+      dpi = 2;
+      break;
     }
 }

@@ -140,7 +140,7 @@
      <rect>
       <x>10</x>
       <y>350</y>
-      <width>101</width>
+      <width>71</width>
       <height>51</height>
      </rect>
     </property>
@@ -151,9 +151,9 @@
    <widget class="QPushButton" name="pushButton_9">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>270</x>
       <y>350</y>
-      <width>101</width>
+      <width>81</width>
       <height>51</height>
      </rect>
     </property>
@@ -164,14 +164,57 @@
    <widget class="QPushButton" name="pushButton_10">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>180</x>
       <y>350</y>
-      <width>101</width>
+      <width>81</width>
       <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string>标记全部</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>370</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>125%</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>100%</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>150%</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>200%</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>350</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>屏幕分辨率</string>
     </property>
    </widget>
   </widget>
